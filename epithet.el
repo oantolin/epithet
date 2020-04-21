@@ -4,6 +4,9 @@
 
 ;; Author: Omar Antolín Camarena <omar@matem.unam.mx>
 ;; Keywords: convenience
+;; Version: 0.1
+;; Package-Requires: ((emacs "24"))
+;; Homepage: https://github.com/oantolin/epithet
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -60,9 +63,11 @@
 (defun epithet-for-help ()
   "Suggest a name for a `help-mode' buffer."
   (when (derived-mode-p 'help-mode)
-    (format "*Help: %s*" (car (last help-xref-stack-item 2))))) 
+    (format "*Help: %s*" (car (last help-xref-stack-item 2)))))
 
-(defgroup eipthet nil "Rename buffers with descriptive names.")
+(defgroup eipthet nil
+  "Rename buffers with descriptive names."
+  :group 'convinience)
 
 (defcustom epithet-suggesters
   '(epithet-for-eww-title epithet-for-Info epithet-for-help)
