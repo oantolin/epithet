@@ -67,14 +67,14 @@
 
 (defgroup eipthet nil
   "Rename buffers with descriptive names."
-  :group 'convinience)
+  :group 'convenience)
 
 (defcustom epithet-suggesters
   '(epithet-for-eww-title epithet-for-Info epithet-for-help)
   "List of functions to suggest a name for the current buffer.
 Each function should either return a string suggestion or nil."
   :type 'hook
-  :group epithet)
+  :group 'epithet)
 
 (defun epithet-suggestion ()
   "Suggest a descriptive name for current buffer.
