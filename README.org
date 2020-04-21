@@ -1,0 +1,32 @@
+/epithet (noun) ep⸱i⸱thet |ˈe-pə-ˌthet also -thət/
+
+1. a characterizing word or phrase accompanying or occurring in place
+   of the name of a person or thing.
+
+* Overview
+
+This package provides a function =epithet-rename-buffer= to rename
+the current buffer with a descriptive name.  The name suggestion is
+governed by the =epithet-suggesters= hook variable: each hook
+should return either a name suggestion or nil, they are called in
+turn and the first non-nil suggestion is taken.
+
+There are currently suggestion functions for eww, info and help
+buffers.  For eww there are two, in fact, one that suggests the
+page title and one that suggests the URL (the title is the
+default).
+
+The =epithet-rename-buffer= function can be called interactively or
+added to appropriate hooks to rename automatically.  If called
+interactively you can use the universal prefix argument to get a
+prompt where you can choose a different name, and the suggested
+name is available as the default value.
+
+If you want to always rename info buffers or eww buffers without
+manual intervention, use:
+
+#+begin_src emacs-lisp
+  (add-hook 'Info-selection-hook #'epithet-rename-buffer)
+  (add-hook 'eww-after-render-hook #'epithet-rename-buffer)
+  (add-hook 'help-mode-hook #'epithet-rename-buffer)
+#+end_src
