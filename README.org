@@ -22,8 +22,8 @@ interactively you can use the universal prefix argument to get a
 prompt where you can choose a different name, and the suggested
 name is available as the default value.
 
-If you want to always rename info buffers or eww buffers without
-manual intervention, use:
+If you want to always rename info, eww or help buffers without manual
+intervention, use:
 
 #+begin_src emacs-lisp
   (add-hook 'Info-selection-hook #'epithet-rename-buffer)
