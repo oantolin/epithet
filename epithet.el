@@ -81,19 +81,18 @@ non-nil suggestion."
 (defun epithet-rename-buffer (&optional new-name)
   "Automatically give current buffer a descriptive name.
 Called interactively with a universal prefix argument, prompt for
-new name (using the suggestion as default value)."
+NEW-NAME (using the suggestion as default value)."
   (interactive
    (list
     (let ((suggestion (epithet-suggestion)))
-      (pcase current-prefix-arg
-        ('(4) (read-string
-               (if suggestion
-                   (format "Rename buffer (default %s): " suggestion)
-                 "Rename buffer: ")
-               nil nil suggestion))
-        (_ suggestion)))))
-  (when new-name
-    (rename-buffer new-name)))
+      (if (equal current-prefix-arg '(4))
+          (read-string
+           (if suggestion
+               (format "Rename buffer (default %s): " suggestion)
+             "Rename buffer: ")
+           nil nil suggestion)
+        suggestion))))
+  (rename-buffer (or new-name (epithet-suggestion) (buffer-name))))
 
 (provide 'epithet)
 ;;; epithet.el ends here
