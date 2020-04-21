@@ -12,7 +12,7 @@ should return either a name suggestion or nil, they are called in
 turn and the first non-nil suggestion is taken.
 
 A cute trick is too add =buffer-file-name= to =epithet-suggesters=: this
-has the effect of suggest the full path for buffers associated with
+has the effect of suggesting the full path for buffers associated with
 files.
 
 There are currently suggestion functions for eww, info and help
