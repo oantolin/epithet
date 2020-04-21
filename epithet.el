@@ -92,7 +92,7 @@ NEW-NAME (using the suggestion as default value)."
              "Rename buffer: ")
            nil nil suggestion)
         suggestion))))
-  (rename-buffer (or new-name (epithet-suggestion) (buffer-name))))
+  (rename-buffer (or new-name (epithet-suggestion) (buffer-name)) t))
 
 (provide 'epithet)
 ;;; epithet.el ends here
