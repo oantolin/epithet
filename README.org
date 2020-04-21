@@ -11,6 +11,10 @@ governed by the =epithet-suggesters= hook variable: each hook
 should return either a name suggestion or nil, they are called in
 turn and the first non-nil suggestion is taken.
 
+A cute trick is too add =buffer-file-name= to =epithet-suggesters=: this
+has the effect of suggest the full path for buffers associated with
+files.
+
 There are currently suggestion functions for eww, info and help
 buffers.  For eww there are two, in fact, one that suggests the
 page title and one that suggests the URL (the title is the
