@@ -42,6 +42,8 @@
 
 ;;; Code:
 
+(defvar eww-data)
+
 (defun epithet-for-eww-title ()
   "Suggest a name for a `eww-mode' buffer."
   (when (derived-mode-p 'eww-mode)
