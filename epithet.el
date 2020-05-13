@@ -1,4 +1,4 @@
-;;; epithet.el --- Rename buffers with descriptive names  -*- lexical-binding: t; -*-
+;; epithet.el --- Rename buffers with descriptive names  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Omar Antolín Camarena
 
@@ -67,7 +67,7 @@
   (when (derived-mode-p 'help-mode)
     (format "*Help: %s*" (car (last help-xref-stack-item 2)))))
 
-(defgroup eipthet nil
+(defgroup epithet nil
   "Rename buffers with descriptive names."
   :group 'convenience)
 
