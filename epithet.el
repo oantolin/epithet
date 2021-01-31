@@ -67,12 +67,25 @@
   (when (derived-mode-p 'help-mode)
     (format "*Help: %s*" (car (last help-xref-stack-item 2)))))
 
+(defun epithet-for-occur ()
+  "Suggest a name for an `occur-mode' buffer."
+  (when (derived-mode-p 'occur-mode)
+    (save-excursion
+      (save-match-data
+        (goto-char (point-min))
+        (when
+            (search-forward-regexp
+             "^[0-9]+ matches for \"\\(.*\\)\" in buffer: \\(.*\\)$"
+             (line-end-position)
+             nil)
+          (format "*Occur %s: %s*" (match-string 2) (match-string 1)))))))
+
 (defgroup epithet nil
   "Rename buffers with descriptive names."
   :group 'convenience)
 
 (defcustom epithet-suggesters
-  '(epithet-for-eww-title epithet-for-Info epithet-for-help)
+  '(epithet-for-eww-title epithet-for-Info epithet-for-help epithet-for-occur)
   "List of functions to suggest a name for the current buffer.
 Each function should either return a string suggestion or nil."
   :type 'hook
