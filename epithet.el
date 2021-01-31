@@ -64,7 +64,7 @@
 
 (defun epithet-for-help ()
   "Suggest a name for a `help-mode' buffer."
-  (when (derived-mode-p 'help-mode)
+  (when (and (derived-mode-p 'help-mode) (equal (buffer-name) "*Help*"))
     (format "*Help: %s*" (car (last help-xref-stack-item 2)))))
 
 (defun epithet-for-occur ()
