@@ -70,15 +70,11 @@
 (defun epithet-for-occur ()
   "Suggest a name for an `occur-mode' buffer."
   (when (derived-mode-p 'occur-mode)
-    (save-excursion
-      (save-match-data
-        (goto-char (point-min))
-        (when
-            (search-forward-regexp
-             "^[0-9]+ matches for \"\\(.*\\)\" in buffer: \\(.*\\)$"
-             (line-end-position)
-             nil)
-          (format "*Occur %s: %s*" (match-string 2) (match-string 1)))))))
+    (format "*Occur: %s in %s*"
+            (car occur-revert-arguments)
+            (mapconcat #'buffer-name
+                       (caddr occur-revert-arguments)
+                       ", "))))
 
 (defgroup epithet nil
   "Rename buffers with descriptive names."
