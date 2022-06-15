@@ -65,7 +65,10 @@
 (defun epithet-for-help ()
   "Suggest a name for a `help-mode' buffer."
   (when (and (derived-mode-p 'help-mode) (equal (buffer-name) "*Help*"))
-    (format "*Help: %s*" (car (last help-xref-stack-item 2)))))
+    (format "*Help: %s*" (pcase help-xref-stack-item
+                           (`(describe-bindings nil ,buffer)
+                            (format "describe-bindings for %s" (with-current-buffer buffer major-mode)))
+                           (`(,_ ,name ,_) name)))))
 
 (defun epithet-for-occur ()
   "Suggest a name for an `occur-mode' buffer."
