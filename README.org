@@ -33,4 +33,5 @@ manual intervention, use:
   (add-hook 'eww-after-render-hook #'epithet-rename-buffer)
   (add-hook 'help-mode-hook #'epithet-rename-buffer)
   (add-hook 'occur-mode-hook #'epithet-rename-buffer)
+  (add-hook 'shell-mode-hook #'epithet-rename-buffer)
 #+end_src

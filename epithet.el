@@ -76,12 +76,23 @@
                        (caddr occur-revert-arguments)
                        ", "))))
 
+(defun epithet-for-shell-command ()
+  "Suggest a name for a buffer started with `shell-command'.
+This only works for async shell commands (possibly started with
+`async-shell-command' but not necessarily)."
+  (when (derived-mode-p 'shell-mode)
+    (when-let* ((process (get-buffer-process (current-buffer)))
+                (command-list (process-command process))
+                (command (mapconcat #'identity command-list " ")))
+      (when (string= (buffer-name) shell-command-buffer-name-async)
+        (format "*Async shell command: %s*" command)))))
+
 (defgroup epithet nil
   "Rename buffers with descriptive names."
   :group 'convenience)
 
 (defcustom epithet-suggesters
-  '(epithet-for-eww-title epithet-for-Info epithet-for-help epithet-for-occur)
+  '(epithet-for-eww-title epithet-for-Info epithet-for-help epithet-for-occur epithet-for-shell-command)
   "List of functions to suggest a name for the current buffer.
 Each function should either return a string suggestion or nil."
   :type 'hook
