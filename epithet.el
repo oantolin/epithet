@@ -83,12 +83,12 @@
   "Suggest a name for a buffer started with `shell-command'.
 This only works for async shell commands (possibly started with
 `async-shell-command' but not necessarily)."
-  (when (derived-mode-p 'shell-mode)
-    (when-let* ((process (get-buffer-process (current-buffer)))
-                (command-list (process-command process))
-                (command (mapconcat #'identity command-list " ")))
-      (when (string= (buffer-name) shell-command-buffer-name-async)
-        (format "*Async shell command: %s*" command)))))
+  (when-let* (((derived-mode-p 'shell-mode))
+              ((string= (buffer-name) shell-command-buffer-name-async))
+              (process (get-buffer-process (current-buffer)))
+              (command-list (process-command process))
+              (command (mapconcat #'identity command-list " ")))
+    (format "*Async shell command: %s*" command)))
 
 (defgroup epithet nil
   "Rename buffers with descriptive names."
