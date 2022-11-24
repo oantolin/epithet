@@ -83,19 +83,30 @@
   "Suggest a name for a buffer started with `shell-command'.
 This only works for async shell commands (possibly started with
 `async-shell-command' but not necessarily)."
-  (when (derived-mode-p 'shell-mode)
-    (when-let* ((process (get-buffer-process (current-buffer)))
-                (command-list (process-command process))
-                (command (mapconcat #'identity command-list " ")))
-      (when (string= (buffer-name) shell-command-buffer-name-async)
-        (format "*Async shell command: %s*" command)))))
+  (when-let* (((derived-mode-p 'shell-mode))
+              ((string= (buffer-name) shell-command-buffer-name-async))
+              (process (get-buffer-process (current-buffer)))
+              (command-list (process-command process))
+              (command (mapconcat #'identity command-list " ")))
+    (format "*Async shell command: %s*" command)))
+
+(defun epithet-for-compilation ()
+  "Suggest a name for a `compilation-mode' buffer."
+  (when-let* (((derived-mode-p 'compilation-mode))
+              compilation-directory
+              (command (car compilation-arguments))
+              (status (let ((process (get-buffer-process (current-buffer))))
+                        (if (and process (memq (process-status process) '(run open listen connect)))
+                            "Running"
+                          "Finished"))))
+    (format "*compilation: [%s] \"%s\" in %s" status command compilation-directory)))
 
 (defgroup epithet nil
   "Rename buffers with descriptive names."
   :group 'convenience)
 
 (defcustom epithet-suggesters
-  '(epithet-for-eww-title epithet-for-Info epithet-for-help epithet-for-occur epithet-for-shell-command)
+  '(epithet-for-eww-title epithet-for-Info epithet-for-help epithet-for-occur epithet-for-shell-command epithet-for-compilation)
   "List of functions to suggest a name for the current buffer.
 Each function should either return a string suggestion or nil."
   :type 'hook
@@ -123,6 +134,13 @@ NEW-NAME (using the suggestion as default value)."
            nil nil suggestion)
         suggestion))))
   (rename-buffer (or new-name (epithet-suggestion) (buffer-name)) t))
+
+;;;###autoload
+(defun epithet-rename-buffer-ignoring-arguments (&rest _)
+  "Save as `epithet-rename-buffer' but ignores arguments passed to it.
+This is useful when using hooks (e.g., `compilation-start-hook'
+that pass arguments epithet doesn't want."
+  (epithet-rename-buffer))
 
 (provide 'epithet)
 ;;; epithet.el ends here

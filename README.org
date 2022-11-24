@@ -34,4 +34,5 @@ manual intervention, use:
   (add-hook 'help-mode-hook #'epithet-rename-buffer)
   (add-hook 'occur-mode-hook #'epithet-rename-buffer)
   (add-hook 'shell-mode-hook #'epithet-rename-buffer)
+  (add-hook 'compilation-start-hook #'epithet-rename-buffer-ignoring-arguments)
 #+end_src
