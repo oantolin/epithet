@@ -35,4 +35,5 @@ manual intervention, use:
   (add-hook 'occur-mode-hook #'epithet-rename-buffer)
   (add-hook 'shell-mode-hook #'epithet-rename-buffer)
   (add-hook 'compilation-start-hook #'epithet-rename-buffer-ignoring-arguments)
+  (add-hook 'compilation-finish-functions #'epithet-rename-buffer-ignoring-arguments)
 #+end_src
