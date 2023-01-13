@@ -1,4 +1,4 @@
-;; epithet.el --- Rename buffers with descriptive names  -*- lexical-binding: t; -*-
+;;; epithet.el --- Rename buffers with descriptive names  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020  Omar Antolín Camarena
 
