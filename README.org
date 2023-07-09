@@ -32,7 +32,7 @@ manual intervention, use:
   (add-hook 'Info-selection-hook #'epithet-rename-buffer)
   (add-hook 'eww-after-render-hook #'epithet-rename-buffer)
   (add-hook 'help-mode-hook #'epithet-rename-buffer)
-  (add-hook 'occur-mode-hook #'epithet-rename-buffer)
+  (add-hook 'occur-hook #'epithet-rename-buffer) ; not occur-mode-hook
   (add-hook 'shell-mode-hook #'epithet-rename-buffer)
   (add-hook 'compilation-start-hook #'epithet-rename-buffer-ignoring-arguments)
   (add-hook 'compilation-finish-functions #'epithet-rename-buffer-ignoring-arguments)
