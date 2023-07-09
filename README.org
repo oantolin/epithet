@@ -37,3 +37,16 @@ manual intervention, use:
   (add-hook 'compilation-start-hook #'epithet-rename-buffer-ignoring-arguments)
   (add-hook 'compilation-finish-functions #'epithet-rename-buffer-ignoring-arguments)
 #+end_src
+
+Due to a quirk in =describe-bindings=, even though it produces a help
+mode buffer, having =epithet-rename-buffer= in the =help-mode-hook= will
+not rename the buffer it creates. If you want those buffers renamed
+automatically too, you should also add this to your configuration:
+
+#+begin_src emacs-lisp
+(defun rename-describe-bindings (&rest _)
+  (with-current-buffer (help-buffer)
+    (epithet-rename-buffer)))
+
+(advice-add 'describe-bindings :after #'rename-describe-bindings)
+#+end_src
